@@ -25,7 +25,7 @@ function Item({ text, id, todos, setTodos, isComplated }) {
 			<span className={ isComplated? "text-decoration-line-through fw-semibold fs-5" : "fw-semibold fs-5"}>{text}</span>
 
 			<button
-				className='btn btn-warning ms-auto'
+				className='btn btn-secondary ms-auto'
 				onClick={() => handleEditTodo(id)}>
 				Edit
 			</button>

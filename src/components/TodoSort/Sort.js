@@ -1,16 +1,18 @@
-function Sort({ todos, setTodos, ComplatedTodo, UnComplatedTodo }) {
+function Sort({ AllTodos, ComplatedTodo, UnComplatedTodo }) {
 
 
 	return (
 		<div className="mt-5">
-			<button className="me-3" onClick={setTodos(todos)}>
-				All <strong>0</strong>
+			<button className="me-3 btn btn-primary" onClick={AllTodos}>
+				All 
 			</button>
-			<button className="me-3" onClick={ComplatedTodo}>
-				Complated <strong>0</strong>
+
+			<button className="me-3 btn btn-success" onClick={ComplatedTodo}>
+				Complated 
 			</button>
-			<button onClick={UnComplatedTodo}>
-				UnComplated <strong>0</strong>
+
+			<button className="btn btn-warning" onClick={UnComplatedTodo}>
+				UnComplated
 			</button>
 		</div>
 	);

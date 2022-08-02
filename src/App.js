@@ -8,17 +8,26 @@ function App() {
 	const [todos, setTodos] = useState(
 		JSON.parse(window.localStorage.getItem('todos')) || [],
 	);
-	
 
+	const [compTodos, setCompTodos] = useState([]);
+	const [uncompTodos, setUncompTodos] = useState([]);
+
+	const AllTodos = () => {
+		setTodos([])
+		setUncompTodos([])
+		setCompTodos([])
+		setTodos(todos)
+	}
 	const ComplatedTodo = () => {
-		const ComplatedTodos = todos.filter((e) => e.isComplated);
-		setTodos([...ComplatedTodos]);
-      
+		setUncompTodos([])
+		const ComplatedTodos = todos.filter((e) => e.isComplated);	
+		setCompTodos([...ComplatedTodos])
 	};
 
 	const UnComplatedTodo = () => {
-		const UnComplatedTodos = todos.filter((e) => e.isComplated===false);
-		setTodos([...UnComplatedTodos]);  
+		setCompTodos([])
+		const UnComplatedTodos = todos.filter((e) => e.isComplated === false);
+		setUncompTodos([...UnComplatedTodos]);
 	};
 
 	const handleChangeInput = (evt) => {
@@ -38,7 +47,11 @@ function App() {
 
 	return (
 		<div className='App'>
-			<Sort todos={todos}  setTodos={setTodos} ComplatedTodo={ComplatedTodo} UnComplatedTodo={UnComplatedTodo}/>
+			<Sort
+				AllTodos={AllTodos}
+				ComplatedTodo={ComplatedTodo}
+				UnComplatedTodo={UnComplatedTodo}
+			/>
 
 			<input
 				className='w-25  form-control m-auto mt-5 mb-4 '
@@ -46,7 +59,7 @@ function App() {
 				type='text'
 			/>
 
-			{todos.length > 0 && (
+			{todos.length > 0 && !uncompTodos.length && !compTodos.length && (
 				<List>
 					{todos.map((e) => (
 						<Item
@@ -55,6 +68,36 @@ function App() {
 							id={e.id}
 							todos={todos}
 							setTodos={setTodos}
+							isComplated={e.isComplated}
+						/>
+					))}
+				</List>
+			)}
+
+			{compTodos.length > 0 && (
+				<List>
+					{compTodos.map((e) => (
+						<Item
+							key={e.id}
+							text={e.text}
+							id={e.id}
+							todos={compTodos}
+							setTodos={setCompTodos}
+							isComplated={e.isComplated}
+						/>
+					))}
+				</List>
+			)}
+
+			{uncompTodos.length > 0 && (
+				<List>
+					{uncompTodos.map((e) => (
+						<Item
+							key={e.id}
+							text={e.text}
+							id={e.id}
+							todos={uncompTodos}
+							setTodos={setUncompTodos}
 							isComplated={e.isComplated}
 						/>
 					))}
